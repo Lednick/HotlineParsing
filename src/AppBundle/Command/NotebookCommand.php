@@ -42,6 +42,8 @@ class NotebookCommand extends ContainerAwareCommand
                 $notebook = new Notebook();
                 $notebook->setImage('http://hotline.ua' . $el->getAttribute('src'));
                 $notebook->setTitle($el->getAttribute('alt'));
+                var_dump($el->parentNode->parentNode->nextSibling->nextSibling);
+                exit;
                 $em->persist($notebook);
                 $count++;
             }

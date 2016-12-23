@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="Notebook")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NotebookRepository")
  */
 class Notebook
 {
@@ -18,6 +19,11 @@ class Notebook
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $price;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -76,6 +82,22 @@ class Notebook
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
 
