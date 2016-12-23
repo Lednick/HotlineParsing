@@ -20,12 +20,12 @@ class Notebook
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $title;
 
     /**
-     *  @ORM\Column(type="string")
+     *  @ORM\Column(type="string", nullable=true)
      * @Assert\Url()
      */
     private $image;

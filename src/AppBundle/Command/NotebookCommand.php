@@ -29,20 +29,17 @@ class NotebookCommand extends ContainerAwareCommand
         $client = new Client();
         $crawler = $client->request('GET', 'http://hotline.ua/computer/noutbuki-netbuki/385943-883-85763-85764-85765/');
         $em = $this->getContainer()->get('doctrine')->getManager();
-
-        $crawler = $crawler->filter('#catalogue > div.cell.gd > div:nth-child(1) > div > div > div.gd-img-cell.pic-tooltip > div > a > img');
-        
+        $crawler = $crawler->filter('#catalogue > div.cell.gd > div:nth-child(2) > div > div > div.gd-img-cell.pic-tooltip > div > a > img');
         $count = 0;
+
         foreach ($crawler as $el) {
             $notebook = new Notebook();
             $notebook->setImage('http://hotline.ua' . $el->getAttribute('src'));
-
-            $title = $client->request('GET', 'http://hotline.ua/computer/noutbuki-netbuki/385943-883-85763-85764-85765/');
-            $notebook->setTitle($title->filter('#catalogue > div.cell.gd > div:nth-child(1) > div > div > div.rel.gd-info-cell > div.cell.text-13.p_b-10.title-fix > b > a')->text());
+            $notebook->setTitle($el->getAttribute('alt'));
             $em->persist($notebook);
             $count++;
-
         }
+
         $em->flush();
 
         $output->writeln([
