@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $notebooks = $em->getRepository('AppBundle:Notebook')->find15NotebooksOrderedByPrice()->setMaxResults('15');
+        $notebooks = $em->getRepository('AppBundle:Notebook')->find15NotebooksOrderedByPrice();
 
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
