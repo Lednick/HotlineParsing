@@ -30,16 +30,23 @@ class NotebookCommand extends ContainerAwareCommand
         $crawler = $client->request('GET', 'http://hotline.ua/computer/noutbuki-netbuki/385943-883-85763-85764-85765/');
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        $crawler = $crawler->filterXPath('//*[@id="catalogue"]/div[6]/div[2]/div/div/div[2]/div[1]/b/a');
-        var_dump($crawler);
-
+        $crawler = $crawler->filter('#catalogue > div.cell.gd > div:nth-child(1) > div > div > div.gd-img-cell.pic-tooltip > div > a > img');
+        
+        $count = 0;
         foreach ($crawler as $el) {
             $notebook = new Notebook();
-            $notebook ->setImage(str_replace('../', 'http://hotline.ua/', $el->getAttribute('href')));
-            $notebook ->setTitle($el->nextSibling->getElementsByTagName('a')->textContent);
+            $notebook->setImage('http://hotline.ua' . $el->getAttribute('src'));
+
+            $title = $client->request('GET', 'http://hotline.ua/computer/noutbuki-netbuki/385943-883-85763-85764-85765/');
+            $notebook->setTitle($title->filter('#catalogue > div.cell.gd > div:nth-child(1) > div > div > div.rel.gd-info-cell > div.cell.text-13.p_b-10.title-fix > b > a')->text());
             $em->persist($notebook);
+            $count++;
 
         }
         $em->flush();
+
+        $output->writeln([
+            'Count of added records:'.$count,
+        ]);
     }
 }
