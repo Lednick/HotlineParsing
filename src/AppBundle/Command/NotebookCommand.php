@@ -35,7 +35,7 @@ class NotebookCommand extends ContainerAwareCommand
         $client = new Client();
         $em = $this->getContainer()->get('doctrine')->getManager();
         $count = 0;
-        for ($page = 0; $page++ < 11;) {
+        for ($page = 0; $page++ < 15;) {
             $crawler = $client->request('GET', 'http://hotline.ua/computer/noutbuki-netbuki/385943-883-85763-85764-85765/?p=' . $page);
             $crawler_result = $crawler->filter('img.max-120');
             $crawler_image = $crawler->filter('div.gd-price-cell')->filter('div.text-14.text-13-480.orng');
