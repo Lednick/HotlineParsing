@@ -14,7 +14,5 @@ class NotebookRepository extends EntityRepository
             )
             ->setMaxResults(15)
             ->getResult();
-
     }
 }
-
