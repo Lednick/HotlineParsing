@@ -10,8 +10,11 @@ class NotebookRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT u FROM AppBundle:Notebook u ORDER BY u.price ASC'
+                'SELECT u FROM AppBundle:Notebook u ORDER BY u.price ASC '
             )
+            ->setMaxResults(15)
             ->getResult();
+
     }
 }
+
