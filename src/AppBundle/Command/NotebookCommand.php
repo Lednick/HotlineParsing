@@ -30,14 +30,14 @@ class NotebookCommand extends ContainerAwareCommand
             $crawler_image = $crawler->filter('div.gd-price-cell')->filter('div.text-14.text-13-480.orng');
 
             foreach ($crawler_result as $key => $el) {
-                $notebook = new Notebook();
-                $notebook->setImage('http://hotline.ua' . $el->getAttribute('src'));
-                $notebook->setTitle($el->getAttribute('alt'));
                 if(is_object($crawler_image->getNode($key)) == false) {
                     continue;
                 }
                 else {
-                    $notebook->setPrice((string)$crawler_image->getNode($key)->nodeValue);
+                    $notebook = new Notebook();
+                    $notebook->setImage('http://hotline.ua' . $el->getAttribute('src'));
+                    $notebook->setTitle($el->getAttribute('alt'));
+                    $notebook->setPrice($crawler_image->getNode($key)->nodeValue);
                     $em->persist($notebook);
                     $count++;
                 }
