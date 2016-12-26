@@ -19,6 +19,11 @@ class NotebookCommand extends ContainerAwareCommand
             ->setHelp("");
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = new Client();
