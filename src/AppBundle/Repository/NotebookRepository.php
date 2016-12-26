@@ -4,8 +4,15 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class NotebookRepository
+ * @package AppBundle\Repository
+ */
 class NotebookRepository extends EntityRepository
 {
+    /**
+     * @return array
+     */
     public function find15NotebooksOrderedByPrice()
     {
         return $this->getEntityManager()

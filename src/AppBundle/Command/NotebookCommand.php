@@ -9,8 +9,14 @@ use Symfony\Component\DomCrawler\Crawler;
 use Goutte\Client;
 use AppBundle\Entity\Notebook;
 
+/**
+ * This command parses Notebooks from Hotline.ua
+ */
 class NotebookCommand extends ContainerAwareCommand
 {
+    /**
+     * Configuring NotebookCommand
+     */
     protected function configure()
     {
         $this
